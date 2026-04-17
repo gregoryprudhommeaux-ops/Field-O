@@ -36,7 +36,7 @@ export function AppShell({
 
         <div className="flex min-h-screen flex-1 flex-col">
           <Topbar currentRoute={currentRoute} />
-          <main className="flex-1 px-4 py-4 pb-[var(--fieldo-mobile-tab-bar-height)] md:px-6 md:py-6 lg:px-8 lg:pb-6">
+          <main className="flex min-h-0 flex-1 flex-col px-4 py-4 pb-[var(--fieldo-mobile-tab-bar-height)] md:px-6 md:py-6 lg:px-8 lg:pb-6">
             {children}
           </main>
         </div>

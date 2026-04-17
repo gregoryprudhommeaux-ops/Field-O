@@ -9,5 +9,9 @@ interface ReportsAppProps {
 }
 
 export default function ReportsApp({ initialReportLanguage, shellLanguage }: ReportsAppProps) {
-  return <LegacyApp embedded initialReportLanguage={initialReportLanguage} shellLanguage={shellLanguage} />
+  return (
+    <div className="flex h-full min-h-0 flex-1 flex-col">
+      <LegacyApp embedded initialReportLanguage={initialReportLanguage} shellLanguage={shellLanguage} />
+    </div>
+  )
 }

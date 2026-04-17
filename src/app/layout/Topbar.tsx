@@ -27,7 +27,7 @@ export function Topbar({ currentRoute }: TopbarProps) {
   const { language, setLanguage } = useLanguage()
 
   return (
-    <header className="sticky top-0 z-20 border-b border-border bg-bg/90 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-border bg-bg lg:bg-bg/90 lg:backdrop-blur">
       <div className="flex items-center justify-between px-4 py-4 md:px-6 lg:px-8">
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-text-secondary">{t(language, 'shellFieldTool')}</p>

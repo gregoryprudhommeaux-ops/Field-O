@@ -43,6 +43,11 @@
     @apply flex-1 bg-bg lg:bg-[radial-gradient(circle_at_center,#18181B_0%,#09090B_100%)] relative h-full w-full overflow-auto;
   }
 
+  /* Embedded in AppShell: one scroll column inside Legacy — avoids nested overflow + mobile jank */
+  .main-stage--embedded {
+    @apply relative flex min-h-0 w-full flex-1 flex-col overflow-hidden bg-bg lg:bg-[radial-gradient(circle_at_center,#18181B_0%,#09090B_100%)];
+  }
+
   /* Step Bar Indicators */
   .step-bar {
     @apply h-[3px] flex-1 bg-border rounded-[2px] transition-all duration-300;
@@ -82,4 +87,9 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #F97316;
   border-radius: 10px;
+}
+
+/* Report wizard: smoother inertial scroll on iOS, less scroll chaining to parent */
+.report-wizard-scroll {
+  -webkit-overflow-scrolling: touch;
 }

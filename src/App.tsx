@@ -1068,7 +1068,9 @@ export default function App({
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-bg">
+    <div
+      className={`flex flex-col overflow-hidden bg-bg ${embedded ? 'h-full min-h-0 flex-1' : 'h-screen'}`}
+    >
       {/* Desktop Sidebar */}
       {!embedded && <aside className="sidebar">
         <div className="flex items-center justify-between mb-8">
@@ -1120,8 +1122,14 @@ export default function App({
       </aside>}
 
       {/* Main Content Stage */}
-      <main className="main-stage overflow-auto h-full lg:py-0">
-        <div className="w-full h-full bg-bg relative">
+      <main
+        className={
+          embedded
+            ? 'main-stage--embedded lg:py-0'
+            : 'main-stage h-full w-full overflow-auto lg:py-0'
+        }
+      >
+        <div className={`relative w-full bg-bg ${embedded ? 'flex h-full min-h-0 flex-col' : 'h-full'}`}>
           {/* Dashboard Home */}
           {(currentRoute === ROUTES.dashboard || currentRoute === ROUTES.history) && (
             <div className="flex flex-col h-full bg-bg">
@@ -1610,7 +1618,7 @@ export default function App({
 
           {/* Report Form */}
           {currentRoute === ROUTES.newReport && (
-            <div className="flex h-full min-h-0 flex-col bg-bg">
+            <div className="flex h-full min-h-0 flex-1 flex-col bg-bg">
               {/* App Header (Internal) */}
               <div className="flex items-center justify-between bg-bg px-4 py-3 lg:px-5 lg:py-6 lg:pb-2">
                 <span className="font-extrabold tracking-tighter text-text-primary">FIELD-O</span>
@@ -1633,17 +1641,17 @@ export default function App({
 
               {/* Scrollable Content Area (mobile: step actions scroll at end of body) */}
               <div
-                className={`min-h-0 flex-1 overflow-y-auto bg-bg px-4 text-left custom-scrollbar lg:px-5 ${
+                className={`report-wizard-scroll min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-y-contain bg-bg px-4 text-left custom-scrollbar lg:px-5 ${
                   embedded ? 'max-lg:pb-[calc(var(--fieldo-mobile-tab-bar-height)+0.75rem)]' : ''
                 }`}
               >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={step}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: embedded ? 0.12 : 0.18 }}
                     className={embedded ? 'pb-1 lg:pb-8' : 'pb-8 lg:pb-8'}
                   >
                     <h1 className="text-[17px] font-semibold leading-snug text-text-primary lg:text-[18px]">
