@@ -1,13 +1,30 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import type {Plugin} from 'vite';
 import {defineConfig, loadEnv} from 'vite';
+
+function siteOriginForMeta(mode: string): Plugin {
+  return {
+    name: 'site-origin-html-meta',
+    transformIndexHtml(html) {
+      const env = loadEnv(mode, '.', '');
+      const fromEnv = env.VITE_SITE_ORIGIN?.trim().replace(/\/$/, '');
+      const vercel = process.env.VERCEL_URL?.trim().replace(/\/$/, '');
+      const origin =
+        fromEnv ||
+        (vercel ? `https://${vercel.replace(/^https?:\/\//, '')}` : '') ||
+        'https://field-o.vercel.app';
+      return html.replaceAll('%SITE_ORIGIN%', origin);
+    },
+  };
+}
 
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   const geminiApiKey = env.GEMINI_API_KEY || process.env.GEMINI_API_KEY || '';
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), siteOriginForMeta(mode)],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(geminiApiKey),
     },
