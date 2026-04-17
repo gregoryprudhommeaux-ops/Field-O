@@ -4,17 +4,27 @@ import path from 'path';
 import type {Plugin} from 'vite';
 import {defineConfig, loadEnv} from 'vite';
 
+/**
+ * Canonical / Open Graph base URL.
+ * Do NOT use VERCEL_URL here: it points at the per-deployment hostname (often team-protected → 401 for bots),
+ * so WhatsApp/Facebook cannot fetch og:image. Prefer VITE_SITE_ORIGIN or VERCEL_PROJECT_PRODUCTION_URL.
+ */
+function resolvePublicSiteOrigin(mode: string): string {
+  const env = loadEnv(mode, '.', '');
+  const explicit = env.VITE_SITE_ORIGIN?.trim().replace(/\/$/, '');
+  if (explicit) return explicit;
+
+  const prodHost = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim().replace(/^https?:\/\//, '').replace(/\/$/, '');
+  if (prodHost) return `https://${prodHost}`;
+
+  return 'https://field-o.vercel.app';
+}
+
 function siteOriginForMeta(mode: string): Plugin {
   return {
     name: 'site-origin-html-meta',
     transformIndexHtml(html) {
-      const env = loadEnv(mode, '.', '');
-      const fromEnv = env.VITE_SITE_ORIGIN?.trim().replace(/\/$/, '');
-      const vercel = process.env.VERCEL_URL?.trim().replace(/\/$/, '');
-      const origin =
-        fromEnv ||
-        (vercel ? `https://${vercel.replace(/^https?:\/\//, '')}` : '') ||
-        'https://field-o.vercel.app';
+      const origin = resolvePublicSiteOrigin(mode);
       return html.replaceAll('%SITE_ORIGIN%', origin);
     },
   };
