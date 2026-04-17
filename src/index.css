@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --color-bg: #09090B;
+  --color-surface: #18181B;
+  --color-border: #27272A;
+  --color-primary: #F97316;
+  --color-success: #10B981;
+  --color-error: #EF4444;
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #A1A1AA;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-text-primary font-sans antialiased;
+  }
+
+  /*
+    Mobile shell: fixed tab bar (Inicio / Nuevo reporte / Ajustes) + wizard dock above it.
+    Keep offsets in sync between MobileBottomNav and App.tsx wizard actions.
+  */
+  :root {
+    --fieldo-mobile-tab-bar-height: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+    --fieldo-mobile-wizard-dock-height: 4.125rem;
+  }
+}
+
+@layer components {
+  /* Phone Mockup Frame - responsive */
+  .phone-frame {
+    /* Mobile: full-bleed app surface. Desktop: remove "phone in the middle". */
+    @apply relative w-full h-full bg-bg overflow-hidden flex flex-col;
+  }
+
+  /* Desktop Sidebar */
+  .sidebar {
+    @apply w-[280px] border-r border-border p-8 hidden lg:flex flex-col gap-10 bg-bg h-full;
+  }
+
+  /* Main Desktop Stage */
+  .main-stage {
+    @apply flex-1 bg-bg lg:bg-[radial-gradient(circle_at_center,#18181B_0%,#09090B_100%)] relative h-full w-full overflow-auto;
+  }
+
+  /* Step Bar Indicators */
+  .step-bar {
+    @apply h-[3px] flex-1 bg-border rounded-[2px] transition-all duration-300;
+  }
+  .step-bar.active {
+    @apply bg-primary;
+  }
+
+  /* Shared App Components */
+  .check-card {
+    @apply bg-surface border border-border rounded-xl p-4 mb-3;
+  }
+
+  .choice-btn {
+    @apply bg-bg border border-border text-text-secondary py-2.5 rounded-md text-[11px] font-bold text-center cursor-pointer transition-all;
+  }
+
+  .choice-btn.active-success {
+    @apply bg-success text-white border-success;
+  }
+
+  .choice-btn.active-fail {
+    @apply bg-error text-white border-error;
+  }
+
+  .choice-btn.active-na {
+    @apply bg-gray-500 text-white border-gray-500;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #09090B;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #F97316;
+  border-radius: 10px;
+}

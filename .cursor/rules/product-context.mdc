@@ -1,0 +1,26 @@
+---
+description: FIELD-O product context
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+FIELD-O is a mobile-first B2B field commissioning and reporting platform.
+
+The app is used by technicians, commissioning engineers, maintenance teams, and site supervisors.
+
+The main goal is to convert field inspections into professional reports quickly with minimal typing.
+
+Key product requirements:
+- mobile-first
+- bilingual English / Spanish
+- minimal keyboard usage
+- offline-capable draft workflow
+- client-based report organization
+- report preview before share
+- professional PDF generation
+- support for multiple equipment units in one report
+
+Do not turn FIELD-O into a generic dashboard or generic form builder.
+Preserve the field-use logic and industrial B2B purpose in all recommendations.
+

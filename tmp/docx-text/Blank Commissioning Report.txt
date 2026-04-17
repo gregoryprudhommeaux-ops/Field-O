@@ -1,0 +1,149 @@
+Customer Information
+Application & Process information
+Photo of Blowers / blower House
+Photo/Sketch of Header piping
+Photo of Aeration Tanks and/or Control Valves
+Blower commissioning
+Pre “Power On” Checking
+Power ON
+Power to blower is present, Blower ELCB OFF.
+Note: If input voltage is more than +/- 10 of name plate voltage blower ELCB to remain off until corrected.
+Unloaded Start Input Power
+Loaded Operation
+Operational Map.
+Customer Communication and Control
+Blower Results and SETUP Information
+Client Blower Control Checking
+Signatures
+Signed as completed:
+Invent Pacific			    		Customer:
+Name:						Name:
+Date:						Date
+Signature: _____________________		Signature: ________________________
+
+[TABLE 1]
+Client: | 
+Contact: | 
+Plant Owner: | 
+Contact: | 
+Plant Name: | 
+Plant Address: | 
+
+[TABLE 2]
+Number of Blowers | 
+Blower Model | 
+Blower SNs, | 
+Aeration Process | 
+Water Depth | (note: Operating water depth required for blower commissioning)
+Aeration Device | 
+
+[TABLE 3]
+Blower Type: | iTurbo | Model: | xx
+Package SN: | xx | Client No: | xx
+Input Voltage: | xx | Motor SN: | xx
+Input Power: | xx | Inverter SN: | xx
+Control Place: | xx | IP Address: | xx
+Control Mode: | xx | Comms. Proto. | xx
+Date of Manuf. | xx | Date of Delivery: | xx
+
+[TABLE 4]
+Internal Check Point | YES | NO | Comment
+Motor(s) Level and Secure (<1mm/m) |  |  | Make sure blower is level
+Motor rotation by hand |  |  | Rotate the Impeller
+Space Between Scroll and Cone (~5-10mm) |  |  | Check there is a small gap
+Scroll Coupling Installed & Secure. |  |  | Check the coupling is secure
+BOV and Motor cooling connections secure. |  |  | 
+Motor(s) Terminals secure. |  |  | 
+Filters Installed. |  |  | 
+Main CB in Off Position, Control CB in ON position |  |  | 
+LAN connection |  |  | 
+Hard Wire connections |  |  | 
+Discharge Flex coupling installed and free |  |  | 
+Discharge Check Valve installed and direction |  |  | 
+Discharge Isolation Valve Installed and Open |  |  | 
+BOV & Motor Cooling lines installed |  |  | 
+Blower Enclosure closed ready for Power up. |  |  | 
+
+[TABLE 5]
+Input Voltage Recordings | Input Voltage Recordings | Input Voltage Recordings | Input Voltage Recordings | Input Voltage Recordings | Input Voltage Recordings
+Point | VAC | Point | VAC | Point | VAC
+R - Earth |  | W - Earth |  | B – Earth | 
+R-W |  | R-B |  | W-B | 
+
+[TABLE 6]
+Initial Power-up Check Point | YES | NO | Comment
+Main CB Operation OK, Blower ELCB ON |  |  | 
+HMI Display boots up , Correct Graphics |  |  | 
+C/P Parameter Check |  |  | 
+Unload Check, Motor(s) rotation |  |  | 
+Stopping Motor(s) Sound |  |  | 
+
+[TABLE 7]
+Input Power Recordings | Input Power Recordings | Input Power Recordings | Input Power Recordings | Input Power Recordings | Input Power Recordings
+Point |  | Point |  | Point | 
+R-B Voltage |  | R-W Voltage |  | B-W Voltage | 
+R (RMS Current) |  | W RMS Current |  | B RMS Current | 
+
+[TABLE 8]
+Notes & Comments
+
+
+[TABLE 9]
+Recordings | Recordings | Recordings | Recordings | Recordings | Recordings | Recordings | Recordings | Recordings
+SV (%) | Motor (rpm) | Current (RWB) | Power (kW) | Flow (m3/min) | P2 (kPa) | ∆P (Pa) | T1 (oC) | T2 (oC)
+35 |  |  |  |  |  |  |  | 
+40 |  |  |  |  |  |  |  | 
+50 |  |  |  |  |  |  |  | 
+60 |  |  |  |  |  |  |  | 
+70 |  |  |  |  |  |  |  | 
+80 |  |  |  |  |  |  |  | 
+90 |  |  |  |  |  |  |  | 
+
+[TABLE 10]
+Notes & Comments
+
+
+[TABLE 11]
+Check Point | YES | NO | Comment
+Customer IP for Blower |  |  | 
+SV Signal to Blower (check with change) |  |  | 
+Error Codes to Customer SCADA |  |  | 
+Monitoring Data to Customer SCADA |  |  | 
+Monitoring Data with correct scaling |  |  | 
+Scaling of 4/20 mA outputs |  |  | 
+Scaling of 4-20 mA inputs |  |  | 
+Load/unload control |  |  | 
+
+[TABLE 12]
+Results | Comment/Value
+Min SV | 
+Max SV | 
+Minimum Operating Pressure | 
+Maximum Operating Pressure | 
+Temp Alarm Set points | 
+Filter Alarm Set points | 
+Air Flow Range | 
+“As Commissioned CP” List recorded | 
+
+[TABLE 13]
+PID LOOD Checking | YES | NO | Comment | Comment | Comment
+Client Blower PID Tuned |  |  |  |  | 
+Simulate Step Change in PID control point. |  |  |  |  | 
+Does the PID overshoot the Set point (value) |  |  |  |  | 
+Customer Max SV Signal |  |  |  |  | 
+Customer Min SV Signal |  |  |  |  | 
+Customer control variable values | P= | P= | P= | I= | D=
+
+[TABLE 14]
+Assist Blower Starting & Stopping | Comment/value
+SV value to initiate starting of assist blower | 
+Time to run prior to starting assist blower | 
+Assist/Running Blower Starting SV | 
+Control PID reset on assist blower BOV close | 
+SV value to initiate stopping of assist blower | 
+Control PID reset on assist blower stop | 
+Running blower SV on assist blower stop | 
+Duty changeover settings / operation. | 
+
+[TABLE 15]
+Notes & Comments

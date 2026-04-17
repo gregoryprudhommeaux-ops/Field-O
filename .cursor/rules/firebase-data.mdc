@@ -1,0 +1,22 @@
+---
+description: FIELD-O Firebase and local data rules
+globs:
+  - "src/**/*"
+alwaysApply: true
+---
+
+FIELD-O uses a hybrid data model:
+- local drafts in IndexedDB / Dexie
+- cloud persistence in Firestore
+- future image storage in Firebase Storage
+
+Rules:
+- preserve offline-first behavior
+- keep sync states explicit
+- do not assume connectivity is always available
+- maintain clear separation between local draft data and synced cloud data
+- all client and report entities must remain strongly typed
+- future auth should be easy to reintroduce
+
+When changing data structures, update docs/tech/DATA_MODEL.md.
+

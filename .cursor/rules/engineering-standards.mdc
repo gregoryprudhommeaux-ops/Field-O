@@ -1,0 +1,23 @@
+---
+description: FIELD-O engineering standards
+globs:
+  - "src/**/*"
+alwaysApply: true
+---
+
+Use TypeScript-first patterns.
+
+Preferred standards:
+- modular feature-based architecture
+- separate UI from business logic
+- separate persistence from rendering
+- keep components focused
+- avoid oversized files
+- avoid hidden side effects
+- keep translation strings centralized
+- keep report logic typed and explicit
+- document major architectural changes in docs/tech/
+
+Do not add new functionality by bloating App.tsx further.
+Refactor into modules when extending the product.
+

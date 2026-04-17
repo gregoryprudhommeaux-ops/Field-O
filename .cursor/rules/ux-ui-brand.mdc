@@ -1,0 +1,25 @@
+---
+description: FIELD-O UX UI and brand rules
+globs:
+  - "src/**/*"
+alwaysApply: true
+---
+
+Design for a premium industrial B2B experience.
+
+Rules:
+- mobile-first
+- strong hierarchy
+- high contrast
+- touch-friendly controls
+- minimal friction
+- no gimmicky animations
+- no playful consumer-style UI
+- no overloaded dashboards
+- avoid unnecessary typing
+- all critical flows must work on mobile and desktop
+
+Use a professional visual language suitable for international B2B users across Mexico, the US, and Europe.
+
+PDF output must feel credible, clean, and client-facing.
+

@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User account information and roles.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase standard UID" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "technician"] },
+        "companyId": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Report": {
+      "title": "Inspection Report",
+      "description": "A field inspection report created by a technician.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string", "description": "Author UID" },
+        "projectName": { "type": "string" },
+        "operator": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "checklist": { "type": "array" },
+        "signature": { "type": "string", "description": "Base64 signature image" },
+        "comments": { "type": "string" },
+        "customFields": { "type": "object" },
+        "status": { "type": "string", "enum": ["draft", "synced"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "projectName", "date", "status"]
+    },
+    "CompanySettings": {
+      "title": "Company Settings",
+      "description": "Admin settings for report customization.",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "logoUrl": { "type": "string", "format": "uri" },
+        "customFields": { "type": "array", "description": "List of custom field names to include in reports" }
+      },
+      "required": ["companyName"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profile data."
+    },
+    "/reports/{reportId}": {
+      "schema": "Report",
+      "description": "All inspection reports."
+    },
+    "/settings/{companyId}": {
+      "schema": "CompanySettings",
+      "description": "Company-wide configuration."
+    }
+  }
+}
