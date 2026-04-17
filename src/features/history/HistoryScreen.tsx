@@ -3,7 +3,6 @@ import React from 'react'
 import type { Report } from '../../types/report.types'
 import { Page } from '../../app/ui/Page'
 import { Card } from '../../app/ui/Card'
-import { Button } from '../../app/ui/Button'
 import { useLanguage } from '../../app/providers/LanguageProvider'
 import { t } from '../../lib/i18n/translations'
 
@@ -28,9 +27,11 @@ export function HistoryScreen({ reports, onOpenPreview }: HistoryScreenProps) {
           </div>
         ) : (
           reports.map((r) => (
-            <div
+            <button
               key={r.id}
-              className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-4 md:flex-row md:items-center md:justify-between"
+              type="button"
+              onClick={() => onOpenPreview(r.id)}
+              className="flex w-full flex-col gap-3 rounded-2xl border border-border bg-surface p-4 text-left transition hover:border-primary/40 hover:bg-surface/90 active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:flex-row md:items-center md:justify-between"
             >
               <div>
                 <p className="text-xs uppercase tracking-wide text-text-secondary">
@@ -44,10 +45,10 @@ export function HistoryScreen({ reports, onOpenPreview }: HistoryScreenProps) {
                 </p>
               </div>
 
-              <div className="flex gap-2">
-                <Button onClick={() => onOpenPreview(r.id)}>{t(language, 'shellHistoryPreview')}</Button>
-              </div>
-            </div>
+              <span className="inline-flex w-fit shrink-0 items-center justify-center self-start rounded-xl border border-border px-4 py-2 text-sm font-semibold text-text-primary md:self-auto">
+                {t(language, 'shellHistoryPreview')}
+              </span>
+            </button>
           ))
         )}
       </Card>

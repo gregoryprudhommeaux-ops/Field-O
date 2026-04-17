@@ -43,6 +43,7 @@ import { saveDraftOffline, syncOfflineDrafts } from './features/offline/offline.
 import { generateLegacyReportPdfFile } from './features/pdf/services/pdf-generator.service';
 import { clearPdfPreview, downloadPdfFile, openPdfExternally, setPdfPreview } from './features/pdf/services/pdf-preview.service';
 import { sharePdfFile } from './features/pdf/services/pdf-share.service';
+import { BrandMark } from './app/ui/BrandMark';
 import { ProjectInfoStep } from './features/reports/steps/ProjectInfoStep';
 import { EquipmentUnitsStep } from './features/reports/steps/EquipmentUnitsStep';
 import { TechnicalReadingsStep } from './features/reports/steps/TechnicalReadingsStep';
@@ -1073,8 +1074,11 @@ export default function App({
     >
       {/* Desktop Sidebar */}
       {!embedded && <aside className="sidebar">
-        <div className="flex items-center justify-between mb-8">
-          <div className="text-2xl font-black tracking-tighter text-primary">FIELD-O</div>
+        <div className="mb-8 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <BrandMark imgClassName="h-9 w-9" alt="" />
+            <div className="text-2xl font-black tracking-tighter text-primary">FIELD-O</div>
+          </div>
           <div className="group relative">
             <img src={user.photoURL || ''} alt="User" className="w-8 h-8 rounded-full border border-primary/50" referrerPolicy="no-referrer" />
           </div>
@@ -1620,8 +1624,11 @@ export default function App({
           {currentRoute === ROUTES.newReport && (
             <div className="flex h-full min-h-0 flex-1 flex-col bg-bg">
               {/* App Header (Internal) */}
-              <div className="flex items-center justify-between bg-bg px-4 py-3 lg:px-5 lg:py-6 lg:pb-2">
-                <span className="font-extrabold tracking-tighter text-text-primary">FIELD-O</span>
+              <div className="flex items-center justify-between gap-3 bg-bg px-4 py-3 lg:px-5 lg:py-6 lg:pb-2">
+                <div className="flex min-w-0 items-center gap-2">
+                  <BrandMark imgClassName="h-8 w-8" alt="" />
+                  <span className="font-extrabold tracking-tighter text-text-primary">FIELD-O</span>
+                </div>
                 <button
                   type="button"
                   title={embedded ? 'Report + PDF language' : 'Toggle language'}

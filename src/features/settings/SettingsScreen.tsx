@@ -375,9 +375,11 @@ export function SettingsScreen({
                               ) : (
                                 <div className="space-y-2">
                                   {clientReports.map((r) => (
-                                    <div
+                                    <button
                                       key={r.id}
-                                      className="flex flex-col gap-2 rounded-xl border border-border bg-bg p-3 md:flex-row md:items-center md:justify-between"
+                                      type="button"
+                                      onClick={() => onOpenPreview(r.id)}
+                                      className="flex w-full flex-col gap-2 rounded-xl border border-border bg-bg p-3 text-left transition hover:border-primary/40 hover:bg-surface/80 active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 md:flex-row md:items-center md:justify-between"
                                     >
                                       <div>
                                         <p className="text-sm font-medium text-text-primary">{r.projectName}</p>
@@ -385,13 +387,10 @@ export function SettingsScreen({
                                           {r.reportDate} · {r.operatorName} · {r.status.toUpperCase()}
                                         </p>
                                       </div>
-                                      <button
-                                        className="rounded-lg border border-border px-4 py-2 text-sm text-text-primary hover:bg-surface"
-                                        onClick={() => onOpenPreview(r.id)}
-                                      >
+                                      <span className="inline-flex w-fit shrink-0 self-start rounded-lg border border-border px-4 py-2 text-sm text-text-primary md:self-auto">
                                         {ui('shellHistoryPreview')}
-                                      </button>
-                                    </div>
+                                      </span>
+                                    </button>
                                   ))}
                                 </div>
                               )}

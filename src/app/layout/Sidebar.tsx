@@ -2,6 +2,7 @@ import React from 'react'
 import { ROUTES, type AppRoute } from '../../lib/constants/routes'
 import { useLanguage } from '../providers/LanguageProvider'
 import { t } from '../../lib/i18n/translations'
+import { BrandMark } from '../ui/BrandMark'
 
 interface SidebarProps {
   currentRoute: AppRoute
@@ -29,10 +30,15 @@ export function Sidebar({
   return (
     <aside className="flex h-full min-h-screen flex-col p-5">
       <div>
-        <div className="mb-8">
-          <p className="text-xs uppercase tracking-[0.22em] text-text-secondary">{t(language, 'shellFieldOperations')}</p>
-          <h1 className="mt-2 text-2xl font-black tracking-tight text-text-primary">FIELD-O</h1>
-          <p className="mt-2 text-sm text-text-secondary">{t(language, 'shellTagline')}</p>
+        <div className="mb-8 flex gap-3">
+          <BrandMark imgClassName="h-12 w-12" alt="" />
+          <div className="min-w-0">
+            <p className="text-xs uppercase tracking-[0.22em] text-text-secondary">
+              {t(language, 'shellFieldOperations')}
+            </p>
+            <h1 className="mt-1 text-2xl font-black tracking-tight text-text-primary">FIELD-O</h1>
+            <p className="mt-2 text-sm text-text-secondary">{t(language, 'shellTagline')}</p>
+          </div>
         </div>
 
         <button

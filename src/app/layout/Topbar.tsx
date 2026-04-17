@@ -3,6 +3,7 @@ import type { AppRoute } from '../../lib/constants/routes'
 import { useLanguage } from '../providers/LanguageProvider'
 import type { AppLanguage } from '../../types/report.types'
 import { t } from '../../lib/i18n/translations'
+import { BrandMark } from '../ui/BrandMark'
 
 interface TopbarProps {
   currentRoute: AppRoute
@@ -29,9 +30,12 @@ export function Topbar({ currentRoute }: TopbarProps) {
   return (
     <header className="sticky top-0 z-20 border-b border-border bg-bg lg:bg-bg/90 lg:backdrop-blur">
       <div className="flex items-center justify-between px-4 py-4 md:px-6 lg:px-8">
-        <div>
-          <p className="text-xs uppercase tracking-[0.18em] text-text-secondary">{t(language, 'shellFieldTool')}</p>
-          <h2 className="text-lg font-semibold text-text-primary">{getTitle(currentRoute, language)}</h2>
+        <div className="flex min-w-0 items-center gap-3">
+          <BrandMark imgClassName="h-9 w-9 max-sm:h-8 max-sm:w-8" alt="" />
+          <div className="min-w-0">
+            <p className="text-xs uppercase tracking-[0.18em] text-text-secondary">{t(language, 'shellFieldTool')}</p>
+            <h2 className="text-lg font-semibold text-text-primary">{getTitle(currentRoute, language)}</h2>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
