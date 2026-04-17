@@ -34,7 +34,6 @@ import {
   Download
 } from 'lucide-react';
 // PDF generation extracted to `features/pdf/services/*`
-import confetti from 'canvas-confetti';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { localDb } from './lib/db';
 import { COMMON_DEFECTS } from './constants';
@@ -47,6 +46,7 @@ import { sharePdfFile } from './features/pdf/services/pdf-share.service';
 import { ProjectInfoStep } from './features/reports/steps/ProjectInfoStep';
 import { EquipmentUnitsStep } from './features/reports/steps/EquipmentUnitsStep';
 import { TechnicalReadingsStep } from './features/reports/steps/TechnicalReadingsStep';
+import { ReportWizardNavButtons } from './features/reports/components/ReportWizardNavButtons';
 import { ReportPreviewScreen } from './features/reports/screens/ReportPreviewScreen';
 import { ROUTES, type AppRoute } from './lib/constants/routes';
 import { 
@@ -603,11 +603,6 @@ export default function App({
         if (activeReportId) {
           await localDb.drafts.delete(activeReportId);
         }
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
       } else {
         await saveDraftOffline(
           {
@@ -645,11 +640,6 @@ export default function App({
           syncReport: (r) => setDoc(doc(db, 'reports', r.id), r as any),
         },
       );
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: { y: 0.8 }
-      });
     } catch (e) {
       console.error("Sync failed", e);
     } finally {
@@ -1604,11 +1594,6 @@ export default function App({
                     onClick={async () => {
                       try {
                         await setDoc(doc(db, 'settings', 'default'), companySettings);
-                        confetti({
-                          particleCount: 50,
-                          spread: 60,
-                          origin: { y: 0.8 }
-                        });
                         alert('Configuration Saved Successfully!');
                       } catch (e) {
                         handleFirestoreError(e, OperationType.WRITE, 'settings/default');
@@ -1625,9 +1610,9 @@ export default function App({
 
           {/* Report Form */}
           {currentRoute === ROUTES.newReport && (
-            <div className="flex flex-col h-full bg-bg"> 
+            <div className="flex h-full min-h-0 flex-col bg-bg">
               {/* App Header (Internal) */}
-              <div className="p-6 pb-2 px-5 flex justify-between items-center bg-bg">
+              <div className="flex items-center justify-between bg-bg px-4 py-3 lg:px-5 lg:py-6 lg:pb-2">
                 <span className="font-extrabold tracking-tighter text-text-primary">FIELD-O</span>
                 <button
                   type="button"
@@ -1640,14 +1625,18 @@ export default function App({
               </div>
 
               {/* Step Indicator Bars */}
-              <div className="flex px-5 py-5 gap-1.5 bg-bg">
+              <div className="flex gap-1.5 bg-bg px-4 py-3 lg:px-5 lg:py-5">
                 {steps.map((_, i) => (
                   <div key={i} className={`step-bar ${i <= step ? 'active' : ''}`} />
                 ))}
               </div>
 
-              {/* Scrollable Content Area */}
-              <div className="flex-1 overflow-y-auto px-5 custom-scrollbar bg-bg text-left">
+              {/* Scrollable Content Area (mobile: step actions scroll at end of body) */}
+              <div
+                className={`min-h-0 flex-1 overflow-y-auto bg-bg px-4 text-left custom-scrollbar lg:px-5 ${
+                  embedded ? 'max-lg:pb-[calc(var(--fieldo-mobile-tab-bar-height)+0.75rem)]' : ''
+                }`}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={step}
@@ -1655,14 +1644,12 @@ export default function App({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className={
-                      embedded
-                        ? 'max-lg:pb-[calc(var(--fieldo-mobile-tab-bar-height)+var(--fieldo-mobile-wizard-dock-height)+0.5rem)] lg:pb-8'
-                        : 'pb-32 lg:pb-8'
-                    }
+                    className={embedded ? 'pb-1 lg:pb-8' : 'pb-8 lg:pb-8'}
                   >
-                    <h1 className="text-[18px] font-semibold text-text-primary">{steps[step].title}</h1>
-                    <p className="text-[12px] text-text-secondary mb-6 tracking-tight">
+                    <h1 className="text-[17px] font-semibold leading-snug text-text-primary lg:text-[18px]">
+                      {steps[step].title}
+                    </h1>
+                    <p className="mb-4 mt-1 text-[12px] tracking-tight text-text-secondary lg:mb-6">
                       {projectName || 'New Report'}
                     </p>
 
@@ -2171,42 +2158,41 @@ export default function App({
                     )}
                   </motion.div>
                 </AnimatePresence>
-              </div>
 
-              {/* Bottom actions — sits above shell MobileBottomNav on small screens */}
-              <div
-                className={`fixed inset-x-0 z-[35] border-t border-border bg-bg/95 px-2 py-2 backdrop-blur lg:static lg:inset-x-auto lg:bottom-auto lg:z-auto lg:bg-bg lg:p-5 ${
-                  embedded ? 'bottom-[var(--fieldo-mobile-tab-bar-height)]' : 'bottom-0'
-                }`}
-              >
-                <div
-                  className={`grid gap-2 pb-0 lg:pb-0 ${
-                    step < steps.length - 1 ? 'grid-cols-2' : 'grid-cols-1'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => {
+                <div className="mt-5 border-t border-border pt-4 lg:hidden">
+                  <ReportWizardNavButtons
+                    step={step}
+                    lastStepIndex={steps.length - 1}
+                    backLabel={step === 0 ? 'Cancel' : t.back}
+                    nextLabel={t.next}
+                    onBack={() => {
                       if (step === 0) {
                         window.dispatchEvent(new CustomEvent('fieldo:navigate', { detail: { route: 'dashboard' } }));
                       } else {
                         void prevStep();
                       }
                     }}
-                    className="rounded-xl px-3 py-3 text-center text-xs font-medium text-text-secondary transition-colors hover:bg-surface lg:border lg:border-border"
-                  >
-                    {step === 0 ? 'Cancel' : t.back}
-                  </button>
-                  {step < steps.length - 1 && (
-                    <button
-                      type="button"
-                      onClick={() => void nextStep()}
-                      className="rounded-xl bg-primary px-3 py-3 text-center text-xs font-medium text-white shadow-md transition-transform active:scale-[0.98]"
-                    >
-                      {t.next}
-                    </button>
-                  )}
+                    onNext={() => void nextStep()}
+                  />
                 </div>
+              </div>
+
+              {/* Desktop: actions stay below scroll area */}
+              <div className="hidden border-t border-border bg-bg lg:block lg:static lg:p-5">
+                <ReportWizardNavButtons
+                  step={step}
+                  lastStepIndex={steps.length - 1}
+                  backLabel={step === 0 ? 'Cancel' : t.back}
+                  nextLabel={t.next}
+                  onBack={() => {
+                    if (step === 0) {
+                      window.dispatchEvent(new CustomEvent('fieldo:navigate', { detail: { route: 'dashboard' } }));
+                    } else {
+                      void prevStep();
+                    }
+                  }}
+                  onNext={() => void nextStep()}
+                />
               </div>
             </div>
           )}

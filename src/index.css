@@ -20,13 +20,9 @@
     @apply bg-bg text-text-primary font-sans antialiased;
   }
 
-  /*
-    Mobile shell: fixed tab bar (Inicio / Nuevo reporte / Ajustes) + wizard dock above it.
-    Keep offsets in sync between MobileBottomNav and App.tsx wizard actions.
-  */
+  /* Mobile shell: fixed tab bar — scroll areas use this for bottom padding when embedded. */
   :root {
     --fieldo-mobile-tab-bar-height: calc(6.25rem + env(safe-area-inset-bottom, 0px));
-    --fieldo-mobile-wizard-dock-height: 4.125rem;
   }
 }
 

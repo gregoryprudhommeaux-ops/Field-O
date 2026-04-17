@@ -6,7 +6,6 @@ import { t } from '../../lib/i18n/translations'
 
 interface TopbarProps {
   currentRoute: AppRoute
-  onQuickNewReport: () => void
 }
 
 function getTitle(route: AppRoute, language: AppLanguage): string {
@@ -24,7 +23,7 @@ function getTitle(route: AppRoute, language: AppLanguage): string {
   }
 }
 
-export function Topbar({ currentRoute, onQuickNewReport }: TopbarProps) {
+export function Topbar({ currentRoute }: TopbarProps) {
   const { language, setLanguage } = useLanguage()
 
   return (
@@ -64,13 +63,6 @@ export function Topbar({ currentRoute, onQuickNewReport }: TopbarProps) {
               🇺🇸
             </button>
           </div>
-
-          <button
-            className="rounded-lg bg-text-primary px-4 py-2 text-sm font-semibold text-bg hover:opacity-90 lg:hidden"
-            onClick={onQuickNewReport}
-          >
-            {t(language, 'shellMobileQuickNew')}
-          </button>
         </div>
       </div>
     </header>
